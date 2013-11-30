@@ -29,13 +29,11 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log("onDeviceReady");
         /* set the display canvas */
         community.barcodereader.canvas = 'mydisplay';
+        /* connect to the event that receive barcode when is found */
         document.addEventListener('barcodeready', function(data) {
             alert(data.value);
             community.barcodereader.resumeRead();
@@ -48,7 +46,7 @@ function start()
     community.barcodereader.startRead(function () {
         // succesfful start
     }, function(error) {
-        alert('can''t start : ' + error);
+        console.log('start : ' + error);
     });
 }
 
@@ -57,6 +55,6 @@ function stop()
     community.barcodereader.stopRead(function () {
         // succesfful stop
     }, function(error) {
-        alert('can''t stop : ' + error);
+        console.log('stop : ' + error);
     });
 }
